@@ -8,7 +8,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Eye, EyeOff } from 'lucide-react';
-import minebeaLogo from '@/assets/minebea-logo.png';
+// Logo will be loaded directly from URL
 
 export const AuthPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -151,11 +151,10 @@ export const AuthPage: React.FC = () => {
         <CardHeader className="text-center pb-6">
           <div className="flex flex-col items-center space-y-1">
             <img 
-              src={minebeaLogo} 
-              alt="Minebea" 
-              className="w-32 h-32"
+              src="/lovable-uploads/94dc2c9c-9597-4cf7-9424-49e46b6fc7eb.png" 
+              alt="Minebea Flow" 
+              className="w-48 h-auto"
             />
-            <div className="text-2xl font-bold text-foreground">Flow</div>
           </div>
           <CardDescription className="mt-4">Japanese Multinational Corporation ERP Software</CardDescription>
         </CardHeader>
