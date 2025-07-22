@@ -59,6 +59,10 @@ export type Database = {
         Args: { _user_id: string; _role: string }
         Returns: boolean
       }
+      set_admin_password: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "root_account" | "admin" | "common_user"
