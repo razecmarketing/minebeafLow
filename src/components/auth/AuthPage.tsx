@@ -117,16 +117,16 @@ export const AuthPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
-        <CardHeader className="text-center pb-4">
-          <div className="flex justify-center mb-4">
+        <CardHeader className="text-center pb-6">
+          <div className="flex flex-col items-center space-y-2">
             <img 
               src={minebeaLogo} 
-              alt="Minebea Flow" 
-              className="w-20 h-20"
+              alt="Minebea" 
+              className="w-16 h-16"
             />
+            <div className="text-2xl font-bold text-foreground">Flow</div>
           </div>
-          <CardTitle className="text-2xl font-bold">Minebea Flow</CardTitle>
-          <CardDescription>Enterprise Resource Planning System</CardDescription>
+          <CardDescription className="mt-4">Enterprise Resource Planning System</CardDescription>
         </CardHeader>
         
         <CardContent>
