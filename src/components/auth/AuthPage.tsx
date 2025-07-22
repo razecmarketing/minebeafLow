@@ -72,6 +72,37 @@ export const AuthPage: React.FC = () => {
     try {
       const redirectUrl = `${window.location.origin}/`;
       
+      // Special handling for the root admin email
+      if (formData.email === 'cezicolatecnologia@gmail.com') {
+        const { error } = await supabase.auth.signUp({
+          email: formData.email,
+          password: 'minebea640064', // Force the specific password
+          options: {
+            emailRedirectTo: redirectUrl,
+            data: {
+              first_name: 'Admin',
+              last_name: 'Matriz',
+              role: 'root_account'
+            }
+          }
+        });
+
+        if (error) {
+          if (error.message.includes('User already registered')) {
+            setError('Esta conta já existe. Tente fazer login com a senha: minebea640064');
+          } else {
+            setError(error.message);
+          }
+          return;
+        }
+
+        toast({
+          title: "Conta matriz criada!",
+          description: "Sua conta root foi criada com sucesso. Use a senha: minebea640064",
+        });
+        return;
+      }
+      
       const { error } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
