@@ -116,12 +116,13 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
             {/* Column Content */}
             <div className="flex-1 bg-muted/30 border border-t-0 rounded-b-lg p-3 space-y-3 min-h-[400px] overflow-y-auto">
               {getTasksForColumn(column.id).length === 0 ? (
-                <div className="flex items-center justify-center h-32 text-muted-foreground">
-                  <div className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-muted flex items-center justify-center">
+                <div className="flex items-center justify-center h-full text-muted-foreground">
+                  <div className="text-center border-2 border-dashed border-muted-foreground/30 rounded-lg p-6 w-full">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-muted flex items-center justify-center">
                       <Plus className="h-6 w-6" />
                     </div>
-                    <p className="text-sm">No tasks</p>
+                    <p className="text-sm font-medium">Nenhuma tarefa</p>
+                    <p className="text-xs text-muted-foreground mt-1">Aguardando primeira requisição</p>
                   </div>
                 </div>
               ) : (

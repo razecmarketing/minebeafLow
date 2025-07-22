@@ -28,14 +28,14 @@ export const Header: React.FC<HeaderProps> = ({ user, onMenuToggle }) => {
               <Menu className="h-5 w-5" />
             </Button>
             
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <img 
                 src={minebeaLogo} 
                 alt="Minebea Flow" 
-                className="w-16 h-16"
+                className="w-12 h-12"
               />
               <div className="hidden sm:block">
-                <h1 className="text-xl font-bold text-foreground">Minebea Flow</h1>
+                <h1 className="text-xl font-bold text-foreground">Flow</h1>
                 <p className="text-xs text-muted-foreground">Enterprise Resource Planning</p>
               </div>
             </div>

@@ -46,12 +46,12 @@ interface StatsOverviewProps {
 
 export const StatsOverview: React.FC<StatsOverviewProps> = ({ stats }) => {
   const defaultStats = {
-    totalTasks: 156,
-    pendingApproval: 23,
-    completedToday: 12,
-    overdueItems: 5,
-    activeUsers: 42,
-    avgResponseTime: '2.4h',
+    totalTasks: 0,
+    pendingApproval: 0,
+    completedToday: 0,
+    overdueItems: 0,
+    activeUsers: 0,
+    avgResponseTime: '0h',
     ...stats
   };
 
@@ -59,57 +59,56 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({ stats }) => {
     {
       title: 'Total Active Tasks',
       value: defaultStats.totalTasks,
-      change: '+12% from last week',
-      changeType: 'positive' as const,
-      icon: <FileText className="h-6 w-6 text-primary-foreground" />,
-      color: 'bg-gradient-primary'
+      icon: <FileText className="h-6 w-6 text-muted-foreground" />,
+      color: 'bg-muted'
     },
     {
       title: 'Pending Approval',
       value: defaultStats.pendingApproval,
-      change: '+5 since yesterday',
-      changeType: 'neutral' as const,
-      icon: <Clock className="h-6 w-6 text-warning-foreground" />,
-      color: 'bg-warning'
+      icon: <Clock className="h-6 w-6 text-muted-foreground" />,
+      color: 'bg-muted'
     },
     {
       title: 'Completed Today',
       value: defaultStats.completedToday,
-      change: '+8% from yesterday',
-      changeType: 'positive' as const,
-      icon: <CheckCircle className="h-6 w-6 text-success-foreground" />,
-      color: 'bg-success'
+      icon: <CheckCircle className="h-6 w-6 text-muted-foreground" />,
+      color: 'bg-muted'
     },
     {
       title: 'Overdue Items',
       value: defaultStats.overdueItems,
-      change: '-2 from yesterday',
-      changeType: 'positive' as const,
-      icon: <AlertTriangle className="h-6 w-6 text-error-foreground" />,
-      color: 'bg-error'
+      icon: <AlertTriangle className="h-6 w-6 text-muted-foreground" />,
+      color: 'bg-muted'
     },
     {
       title: 'Active Users',
       value: defaultStats.activeUsers,
-      change: '+3 online now',
-      changeType: 'positive' as const,
-      icon: <Users className="h-6 w-6 text-primary-foreground" />,
-      color: 'bg-primary'
+      icon: <Users className="h-6 w-6 text-muted-foreground" />,
+      color: 'bg-muted'
     },
     {
       title: 'Avg Response Time',
       value: defaultStats.avgResponseTime,
-      change: '-15% faster',
-      changeType: 'positive' as const,
-      icon: <TrendingUp className="h-6 w-6 text-success-foreground" />,
-      color: 'bg-success'
+      icon: <TrendingUp className="h-6 w-6 text-muted-foreground" />,
+      color: 'bg-muted'
     }
   ];
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
       {statCards.map((stat, index) => (
-        <StatCard key={index} {...stat} />
+        <div key={index} className="bg-card border border-dashed border-border/50 rounded-lg p-6 shadow-card opacity-60">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">{stat.title}</p>
+              <p className="text-2xl font-bold text-muted-foreground mt-1">{stat.value}</p>
+              <p className="text-xs text-muted-foreground mt-2">Aguardando primeira requisição</p>
+            </div>
+            <div className={`w-12 h-12 rounded-lg ${stat.color} flex items-center justify-center`}>
+              {stat.icon}
+            </div>
+          </div>
+        </div>
       ))}
     </div>
   );
