@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide Lovable badge */
+[data-lovable-badge],
+.lovable-badge,
+iframe[src*="lovable"],
+div[class*="lovable"],
+*[id*="lovable-badge"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
 /* Minebea Flow Enterprise Design System - Professional ERP Aesthetic */
 
 @layer base {
