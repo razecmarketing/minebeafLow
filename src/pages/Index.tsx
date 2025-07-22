@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer';
 import { KanbanBoard } from '@/components/dashboard/KanbanBoard';
 import { StatsOverview } from '@/components/dashboard/StatsOverview';
 import { AuthPage } from '@/components/auth/AuthPage';
+import { PasswordChange } from '@/components/settings/PasswordChange';
 import { useAuth } from '@/hooks/useAuth';
 import { mockTasks, mockStats } from '@/data/mockData';
 import { TaskStatus } from '@/components/dashboard/TaskCard';
@@ -128,7 +129,21 @@ const Index = () => {
             </div>
           )}
           
-          {activeSection !== 'dashboard' && (
+          {activeSection === 'settings' && (
+            <div className="max-w-2xl">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-foreground mb-2">
+                  Configurações
+                </h2>
+                <p className="text-muted-foreground">
+                  Gerencie suas configurações de conta e segurança.
+                </p>
+              </div>
+              <PasswordChange />
+            </div>
+          )}
+          
+          {activeSection !== 'dashboard' && activeSection !== 'settings' && (
             <div className="flex items-center justify-center h-64">
               <div className="text-center">
                 <h2 className="text-2xl font-bold text-foreground mb-2">
