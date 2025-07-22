@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Bell, Search, Settings, User, LogOut, Menu } from 'lucide-react';
+import minebeaLogo from '@/assets/minebea-logo.png';
 
 interface HeaderProps {
   user?: {
@@ -27,10 +28,12 @@ export const Header: React.FC<HeaderProps> = ({ user, onMenuToggle }) => {
               <Menu className="h-5 w-5" />
             </Button>
             
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">MB</span>
-              </div>
+            <div className="flex items-center gap-3">
+              <img 
+                src={minebeaLogo} 
+                alt="Minebea Flow" 
+                className="w-10 h-10"
+              />
               <div className="hidden sm:block">
                 <h1 className="text-xl font-bold text-foreground">Minebea Flow</h1>
                 <p className="text-xs text-muted-foreground">Enterprise Resource Planning</p>
