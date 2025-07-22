@@ -112,10 +112,9 @@ export const LoginForm = () => {
             <img 
               src="/lovable-uploads/39585a0e-b518-4ca1-a5dc-ed5c9fb3ebe5.png" 
               alt="Minebea Flow" 
-              className="h-16 w-auto"
+              className="h-32 w-auto"
             />
           </div>
-          <CardTitle className="text-2xl font-bold">Minebea Flow</CardTitle>
           <CardDescription>
             Sistema de Gestão e Controle
           </CardDescription>
