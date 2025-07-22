@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Bell, Search, Settings, User, LogOut, Menu } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
 import minebeaLogo from '@/assets/minebea-logo.png';
 
 interface HeaderProps {
@@ -13,6 +14,12 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ user, onMenuToggle }) => {
+  const { signOut, profile } = useAuth();
+
+  const handleLogout = async () => {
+    await signOut();
+  };
+
   return (
     <header className="bg-card border-b border-border shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,11 +86,7 @@ export const Header: React.FC<HeaderProps> = ({ user, onMenuToggle }) => {
                   <Button 
                     variant="ghost" 
                     size="icon"
-                    onClick={async () => {
-                      const { useAuth } = await import('@/hooks/useAuth');
-                      const { signOut } = useAuth();
-                      signOut();
-                    }}
+                    onClick={handleLogout}
                   >
                     <LogOut className="h-5 w-5" />
                   </Button>
