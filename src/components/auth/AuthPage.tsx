@@ -104,7 +104,7 @@ export const AuthPage: React.FC = () => {
       } else {
         toast({
           title: "Cadastro realizado com sucesso!",
-          description: "Verifique seu email para confirmar sua conta.",
+          description: "Sua conta foi criada e você já pode fazer login.",
         });
       }
     } catch (err) {
@@ -234,7 +234,7 @@ export const AuthPage: React.FC = () => {
                     disabled={isLoading}
                   >
                     <option value="common_user">Usuário Comum</option>
-                    <option value="admin">Administrador (Requer Aprovação)</option>
+                    <option value="admin">Administrador</option>
                   </select>
                 </div>
                 
