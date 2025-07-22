@@ -118,7 +118,7 @@ export const AuthPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-background to-muted flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center pb-6">
-          <div className="flex flex-col items-center space-y-2">
+          <div className="flex flex-col items-center space-y-1">
             <img 
               src={minebeaLogo} 
               alt="Minebea" 
@@ -126,7 +126,7 @@ export const AuthPage: React.FC = () => {
             />
             <div className="text-2xl font-bold text-foreground">Flow</div>
           </div>
-          <CardDescription className="mt-4">Enterprise Resource Planning System</CardDescription>
+          <CardDescription className="mt-4">Japanese Multinational Corporation ERP Software</CardDescription>
         </CardHeader>
         
         <CardContent>
