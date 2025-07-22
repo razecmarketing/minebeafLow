@@ -122,7 +122,7 @@ export const AuthPage: React.FC = () => {
             <img 
               src={minebeaLogo} 
               alt="Minebea" 
-              className="w-16 h-16"
+              className="w-32 h-32"
             />
             <div className="text-2xl font-bold text-foreground">Flow</div>
           </div>
