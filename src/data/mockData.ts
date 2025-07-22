@@ -18,10 +18,10 @@ export const mockTasks: MockTask[] = [];
 
 export const mockUser = {
   id: '1',
-  name: 'Admin User',
+  name: 'Cezi Cola',
   role: 'admin' as const,
   tenant: 'Acme Corp',
-  email: 'admin@acme.com'
+  email: 'biocodetechnology@gmail.com'
 };
 
 export const mockStats = {
