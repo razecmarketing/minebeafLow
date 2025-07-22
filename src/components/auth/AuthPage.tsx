@@ -114,29 +114,6 @@ export const AuthPage: React.FC = () => {
     }
   };
 
-  const handleDemoAccess = async () => {
-    setIsLoading(true);
-    setError('');
-
-    try {
-      const { error } = await supabase.auth.signInAnonymously();
-
-      if (error) {
-        setError('Erro ao acessar demonstração. Tente novamente.');
-        return;
-      }
-
-      toast({
-        title: "Acesso à demonstração liberado!",
-        description: "Explorando o sistema em modo demonstração...",
-      });
-    } catch (err) {
-      setError('Erro inesperado. Tente novamente.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
@@ -153,32 +130,6 @@ export const AuthPage: React.FC = () => {
         </CardHeader>
         
         <CardContent>
-          <div className="mb-4">
-            <Button 
-              onClick={handleDemoAccess} 
-              variant="outline" 
-              className="w-full"
-              disabled={isLoading}
-            >
-              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              🚀 Acesso Rápido - Demonstração
-            </Button>
-            <p className="text-xs text-muted-foreground text-center mt-2">
-              Explore o sistema sem necessidade de cadastro
-            </p>
-          </div>
-          
-          <div className="relative mb-4">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">
-                Ou faça login
-              </span>
-            </div>
-          </div>
-
           <Tabs defaultValue="signin" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="signin">Entrar</TabsTrigger>
