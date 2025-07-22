@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({ user, onMenuToggle }) => {
               <img 
                 src={minebeaLogo} 
                 alt="Minebea Flow" 
-                className="w-10 h-10"
+                className="w-16 h-16"
               />
               <div className="hidden sm:block">
                 <h1 className="text-xl font-bold text-foreground">Minebea Flow</h1>
@@ -76,7 +76,15 @@ export const Header: React.FC<HeaderProps> = ({ user, onMenuToggle }) => {
                     <User className="h-5 w-5" />
                   </Button>
                   
-                  <Button variant="ghost" size="icon">
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    onClick={async () => {
+                      const { useAuth } = await import('@/hooks/useAuth');
+                      const { signOut } = useAuth();
+                      signOut();
+                    }}
+                  >
                     <LogOut className="h-5 w-5" />
                   </Button>
                 </div>

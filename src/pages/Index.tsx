@@ -4,14 +4,55 @@ import { Sidebar } from '@/components/layout/Sidebar';
 import { Footer } from '@/components/layout/Footer';
 import { KanbanBoard } from '@/components/dashboard/KanbanBoard';
 import { StatsOverview } from '@/components/dashboard/StatsOverview';
-import { mockTasks, mockUser, mockStats } from '@/data/mockData';
+import { AuthPage } from '@/components/auth/AuthPage';
+import { useAuth } from '@/hooks/useAuth';
+import { mockTasks, mockStats } from '@/data/mockData';
 import { TaskStatus } from '@/components/dashboard/TaskCard';
 import { toast } from '@/hooks/use-toast';
+import { Loader2 } from 'lucide-react';
 
 const Index = () => {
+  const { user, profile, loading } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('dashboard');
   const [tasks, setTasks] = useState(mockTasks);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <AuthPage />;
+  }
+
+  // Check if admin user is approved
+  if (profile?.role === 'admin' && !profile?.admin_approved) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted">
+        <div className="text-center p-8 bg-card rounded-lg shadow-lg max-w-md">
+          <h2 className="text-2xl font-bold mb-4">Aguardando Aprovação</h2>
+          <p className="text-muted-foreground mb-4">
+            Sua conta de administrador está aguardando aprovação. 
+            Você receberá um email quando sua conta for aprovada.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Entre em contato com cezicolatecnologia@gmail.com se tiver dúvidas.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  const mockUser = {
+    name: profile ? `${profile.first_name} ${profile.last_name}` : user.email || 'Usuário',
+    role: (profile?.role === 'root_account' ? 'root' : 
+          profile?.role === 'admin' ? 'admin' : 'user') as 'admin' | 'user' | 'root',
+    tenant: profile?.tenant_id || 'Default'
+  };
 
   const handleTaskStatusChange = (taskId: string, newStatus: TaskStatus) => {
     setTasks(prevTasks =>
@@ -68,7 +109,7 @@ const Index = () => {
             <div className="space-y-6">
               <div>
                 <h1 className="text-3xl font-bold text-foreground mb-2">
-                  Welcome back, {mockUser.name}
+                  Bem-vindo, {mockUser.name}
                 </h1>
                 <p className="text-muted-foreground">
                   Here's what's happening with your tasks and requests today.
