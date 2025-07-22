@@ -48,10 +48,11 @@ const Index = () => {
   }
 
   const mockUser = {
-    name: profile ? `${profile.first_name} ${profile.last_name}` : user.email || 'Usuário',
+    name: profile ? `${profile.first_name} ${profile.last_name}` : 
+          user.email || (user.is_anonymous ? 'Usuário Demo' : 'Usuário'),
     role: (profile?.role === 'root_account' ? 'root' : 
           profile?.role === 'admin' ? 'admin' : 'user') as 'admin' | 'user' | 'root',
-    tenant: profile?.tenant_id || 'Default'
+    tenant: profile?.tenant_id || (user.is_anonymous ? 'Demo' : 'Default')
   };
 
   const handleTaskStatusChange = (taskId: string, newStatus: TaskStatus) => {
