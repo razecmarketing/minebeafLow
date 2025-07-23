@@ -46,12 +46,13 @@ export const useTenants = () => {
     }
   };
 
-  const createTenant = async (tenantData: Partial<Tenant>) => {
+  const createTenant = async (tenantData: { name: string; domain?: string; settings?: any }) => {
     try {
       const { data, error } = await supabase
         .from('tenants')
         .insert([{
-          ...tenantData,
+          name: tenantData.name,
+          domain: tenantData.domain,
           is_active: true,
           settings: tenantData.settings || {}
         }])

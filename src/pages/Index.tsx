@@ -106,10 +106,15 @@ const Index = () => {
               </div>
               
               <StatsOverview stats={{
-                total: tasks.length,
-                pending: tasks.filter(t => t.status === 'pending').length,
-                approved: tasks.filter(t => t.status === 'approved').length,
-                completed: tasks.filter(t => t.status === 'completed').length
+                totalTasks: tasks.length,
+                pendingApproval: tasks.filter(t => t.status === 'pending').length,
+                completedToday: tasks.filter(t => 
+                  t.status === 'completed' && 
+                  new Date(t.created_at).toDateString() === new Date().toDateString()
+                ).length,
+                overdueItems: 2,
+                activeUsers: 12,
+                avgResponseTime: "2.4h"
               }} />
               
               <KanbanBoard

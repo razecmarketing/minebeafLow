@@ -36,8 +36,10 @@ export const TaskCreationForm: React.FC<TaskCreationFormProps> = ({ onClose, onS
     try {
       setLoading(true);
       await createTask({
-        ...formData,
-        due_date: date?.toISOString()
+        title: formData.title,
+        description: formData.description,
+        priority: formData.priority,
+        category: formData.category
       });
       
       onSuccess?.();

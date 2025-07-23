@@ -9,14 +9,18 @@ export interface Task {
   description: string;
   status: 'pending' | 'approved' | 'production' | 'completed' | 'rejected';
   priority: 'low' | 'medium' | 'high' | 'urgent';
+  assignee?: string;
+  requester: string;
+  dueDate: string;
+  createdAt: string;
+  slaHours?: number;
+  category?: string;
+  tenant_id: string;
   assignee_id?: string;
   requester_id: string;
   sector_id?: string;
   custom_form_id?: string;
   due_date?: string;
-  sla_hours?: number;
-  category?: string;
-  tenant_id: string;
   created_at: string;
   updated_at: string;
   assignee_name?: string;
@@ -44,8 +48,8 @@ export const useTasks = () => {
         .from('tasks')
         .select(`
           *,
-          assignee:assignee_id(first_name, last_name),
-          requester:requester_id(first_name, last_name),
+          assignee:profiles!assignee_id(first_name, last_name),
+          requester:profiles!requester_id(first_name, last_name),
           sector:sectors(name)
         `)
         .eq('tenant_id', profile.tenant_id)
@@ -55,6 +59,11 @@ export const useTasks = () => {
 
       const formattedTasks = data?.map(task => ({
         ...task,
+        assignee: task.assignee ? `${task.assignee.first_name} ${task.assignee.last_name}` : undefined,
+        requester: task.requester ? `${task.requester.first_name} ${task.requester.last_name}` : '',
+        dueDate: task.due_date || task.created_at,
+        createdAt: task.created_at,
+        slaHours: task.sla_hours,
         assignee_name: task.assignee ? `${task.assignee.first_name} ${task.assignee.last_name}` : undefined,
         requester_name: task.requester ? `${task.requester.first_name} ${task.requester.last_name}` : undefined,
         sector_name: task.sector?.name
@@ -73,14 +82,17 @@ export const useTasks = () => {
     }
   };
 
-  const createTask = async (taskData: Partial<Task>) => {
+  const createTask = async (taskData: { title: string; description?: string; priority?: Task['priority']; category?: string }) => {
     if (!profile?.tenant_id) return;
 
     try {
       const { data, error } = await supabase
         .from('tasks')
         .insert([{
-          ...taskData,
+          title: taskData.title,
+          description: taskData.description,
+          priority: taskData.priority || 'medium',
+          category: taskData.category,
           requester_id: profile.user_id,
           tenant_id: profile.tenant_id,
           status: 'pending'
