@@ -18,10 +18,10 @@ export const mockTasks: MockTask[] = [];
 
 export const mockUser = {
   id: '1',
-  name: 'Cezi Cola',
+  name: 'Sistema Limpo',
   role: 'admin' as const,
-  tenant: 'Acme Corp',
-  email: 'biocodetechnology@gmail.com'
+  tenant: 'Sistema Novo',
+  email: 'sistema@limpo.com'
 };
 
 export const mockStats = {
@@ -29,6 +29,6 @@ export const mockStats = {
   pendingApproval: 0,
   completedToday: 0,
   overdueItems: 0,
-  activeUsers: 0,
+  activeUsers: 1,
   avgResponseTime: '0h'
 };
