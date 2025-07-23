@@ -74,7 +74,11 @@ export const Header: React.FC<HeaderProps> = ({ user, onMenuToggle }) => {
             {user && (
               <div className="flex items-center gap-3 ml-4 pl-4 border-l border-border">
                 <div className="hidden sm:block text-right">
-                  <p className="text-sm font-medium text-foreground">{user.name}</p>
+                  <p className="text-sm font-medium text-foreground">
+                    Bem-vindo, {profile?.first_name && profile?.last_name 
+                      ? `${profile.first_name} ${profile.last_name}` 
+                      : user.name}
+                  </p>
                   <p className="text-xs text-muted-foreground">{user.role} • {user.tenant}</p>
                 </div>
                 
