@@ -9,12 +9,13 @@ interface Task {
   description: string;
   status: TaskStatus;
   priority: 'low' | 'medium' | 'high' | 'urgent';
-  assignee?: string;
-  requester: string;
-  dueDate: string;
-  createdAt: string;
-  slaHours?: number;
+  assignee_name?: string;
+  requester_name: string;
+  due_date?: string;
+  created_at: string;
+  sla_hours?: number;
   category?: string;
+  tenant_id: string;
 }
 
 interface KanbanBoardProps {

@@ -6,17 +6,19 @@ import { KanbanBoard } from '@/components/dashboard/KanbanBoard';
 import { StatsOverview } from '@/components/dashboard/StatsOverview';
 import { AuthPage } from '@/components/auth/AuthPage';
 import { PasswordChange } from '@/components/settings/PasswordChange';
+import { TaskCreationForm } from '@/components/dashboard/TaskCreationForm';
 import { useAuth } from '@/hooks/useAuth';
-import { mockTasks, mockStats } from '@/data/mockData';
+import { useTasks } from '@/hooks/useTasks';
 import { TaskStatus } from '@/components/dashboard/TaskCard';
 import { toast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 
 const Index = () => {
   const { user, profile, loading } = useAuth();
+  const { tasks, loading: tasksLoading, updateTaskStatus } = useTasks();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('dashboard');
-  const [tasks, setTasks] = useState(mockTasks);
+  const [showTaskCreation, setShowTaskCreation] = useState(false);
 
   if (loading) {
     return (
@@ -55,18 +57,8 @@ const Index = () => {
     tenant: profile?.tenant_id || 'Default'
   };
 
-  const handleTaskStatusChange = (taskId: string, newStatus: TaskStatus) => {
-    setTasks(prevTasks =>
-      prevTasks.map(task =>
-        task.id === taskId ? { ...task, status: newStatus } : task
-      )
-    );
-    
-    toast({
-      title: "Task Updated",
-      description: `Task status changed to ${newStatus}`,
-      variant: "default",
-    });
+  const handleTaskStatusChange = async (taskId: string, newStatus: TaskStatus) => {
+    await updateTaskStatus(taskId, newStatus);
   };
 
   const handleTaskView = (taskId: string) => {
@@ -79,11 +71,7 @@ const Index = () => {
   };
 
   const handleCreateTask = () => {
-    toast({
-      title: "Create New Task",
-      description: "Opening task creation form...",
-      variant: "default",
-    });
+    setShowTaskCreation(true);
   };
 
   const handleMenuToggle = () => {
@@ -117,7 +105,12 @@ const Index = () => {
                 </p>
               </div>
               
-              <StatsOverview stats={mockStats} />
+              <StatsOverview stats={{
+                total: tasks.length,
+                pending: tasks.filter(t => t.status === 'pending').length,
+                approved: tasks.filter(t => t.status === 'approved').length,
+                completed: tasks.filter(t => t.status === 'completed').length
+              }} />
               
               <KanbanBoard
                 tasks={tasks}
@@ -159,6 +152,20 @@ const Index = () => {
       </div>
       
       <Footer />
+      
+      {showTaskCreation && (
+        <TaskCreationForm
+          onClose={() => setShowTaskCreation(false)}
+          onSuccess={() => {
+            setShowTaskCreation(false);
+            toast({
+              title: "Sucesso",
+              description: "Requisição criada com sucesso!",
+              variant: "default",
+            });
+          }}
+        />
+      )}
     </div>
   );
 };
